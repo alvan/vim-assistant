@@ -5,8 +5,8 @@ Vim script: http://www.vim.org/scripts/script.php?script_id=2805
 
 Display the definition of functions, variables, etc. (Tags, PHP/JS/Vim/...)
 
-1. Use <C-h\> to display the definition(load from tags and the dict) of functions, variables, etc.
-2. Use <C-x\><C-u\> to complete words.
+1. Use &lt;C-k&gt; to display the definition(load from tags and the dict) of functions, variables, etc.
+2. Use &lt;C-x&gt;&lt;C-u&gt; to complete words.
 
 Supported dictionary list:
 
@@ -17,4 +17,4 @@ Supported dictionary list:
 
 #### Install Detail
 
-Just put the files into ~/.vim/plugin or <HOMEDIR>\vimfiles\plugin (for Windows).
+Just put the files into ~/.vim/plugin or &lt;HOMEDIR&gt;\vimfiles\plugin (for Windows).
