@@ -17,4 +17,4 @@ Supported dictionary list:
 
 #### Install Detail
 
-Just put the files into ~/.vim/plugin or &lt;HOMEDIR&gt;\vimfiles\plugin (for Windows).
+Just put the files into ~/.vim/ or &lt;HOMEDIR&gt;\vimfiles\ (for Windows).
