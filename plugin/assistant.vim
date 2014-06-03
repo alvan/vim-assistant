@@ -4,9 +4,9 @@
 "          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2012-11-18
+"      Modified:  2014-06-03
 "       License:  Public Domain
-"   Description:  1. Display the definition of functions, variables, etc.
+"   Description:  1. Display the definition of functions, variables, etc(<C-k>).
 "                 2. Complete keywords(<C-x><C-u>).
 "
 " --}}}
@@ -15,7 +15,7 @@
 if exists("g:loaded_assistant")
     finish
 endif
-let g:loaded_assistant = "Version 1.5.2"
+let g:loaded_assistant = "Version 1.5.3"
 
 " ================================== Conf {{{ ==================================
 "
@@ -141,7 +141,7 @@ endf
 function s:Help()
     let fext = s:Fext()
     if !s:Init(fext)
-        echo 'assistant.MISS : Does not support the file type "'.fext.'"'
+        echo 'assistant.MIS: Does not support the file type "'.fext.'"'
         return
     endif
 
@@ -158,7 +158,7 @@ function s:Help()
         let num -= 1
     endw
     if !exists("lcol")
-        echo 'assistant.ERR : The current contents under the cursor is not a keyword'
+        echo 'assistant.ERR: The current contents under the cursor is not a keyword'
         return
     endif
 
@@ -180,7 +180,7 @@ function s:Help()
     let tlen = len(tlst) - 1
     while tlen >= 0
         if tlst[tlen]['kind'] =~ s:aTags
-            call add(list, tlst[tlen]['cmd'] . '    ' . pathshorten(tlst[tlen]['filename']))
+            call add(list, substitute(substitute(tlst[tlen]['cmd'], '^\s*/^\s*', '', ''), '\s*\$/$', '', '') . '  in  ' . pathshorten(tlst[tlen]['filename']))
         endif
         let tlen -= 1
     endw
@@ -192,7 +192,7 @@ function s:Help()
         let len -= 1
     endw
 
-    echo len(list) > 0 ? join(sort(list), "\n") : 'assistant.MISS : Can not find the information on "'.key.'"'
+    echo len(list) > 0 ? join(sort(list), "\n") : 'assistant.MIS: "'.key.'"'
 endf
 
 autocmd Filetype,BufEnter,BufRead * :call ASetCompFunc()
