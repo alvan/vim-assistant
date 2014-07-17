@@ -4,7 +4,7 @@
 "          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2014-06-03
+"      Modified:  2014-07-17
 "       License:  Public Domain
 "   Description:  1. Display the definition of functions, variables, etc(<C-k>).
 "                 2. Complete keywords(<C-x><C-u>).
@@ -109,7 +109,8 @@ endf
 
 " ================================== }}} Main ==================================
 function s:Fext()
-    return &filetype
+    return getwinvar(winnr(), '&filetype')
+    " return &filetype
     " return tolower((strridx(expand("%"),".") == -1) ? "" : strpart(expand("%"),(strridx(expand("%"),".") + 1)))
 endf
 
