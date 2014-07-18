@@ -4,7 +4,7 @@
 "          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2014-07-17
+"      Modified:  2014-07-18
 "       License:  Public Domain
 "   Description:  1. Display the definition of functions, variables, etc(<C-k>).
 "                 2. Complete keywords(<C-x><C-u>).
@@ -15,65 +15,70 @@
 if exists("g:loaded_assistant")
     finish
 endif
-let g:loaded_assistant = "Version 1.5.3"
+let g:loaded_assistant = "1.5.8"
 
 " ================================== Conf {{{ ==================================
 "
-nmap <silent> <unique> <C-k> :call <SID>Help()<Cr>
-"
+if !exists("g:assistant_exclude_complete_filetypes")
+    let g:assistant_exclude_complete_filetypes = []
+endif
+
+au Filetype,BufEnter,BufRead * :call ASetComplete()
+nnoremap <silent> <unique> <C-k> :call <SID>PopHelpList()<Cr>
+
 " Mapping for Eclipse user
-" imap <silent> <unique> <A-/> <C-x><C-u>
-" nmap <silent> <unique> <A-/> :call <SID>Help()<Cr>
+"
+" inoremap <silent> <unique> <A-/> <C-x><C-u>
+" nnoremap <silent> <unique> <A-/> :call <SID>PopHelpList()<Cr>
+"
 "
 " Mapping for Netbeans user
-" imap <silent> <unique> <C-\> <C-x><C-u>
-" nmap <silent> <unique> <C-\> :call <SID>Help()<Cr>
+"
+" inoremap <silent> <unique> <C-\> <C-x><C-u>
+" nnoremap <silent> <unique> <C-\> :call <SID>PopHelpList()<Cr>
 
-let s:aChar = '[a-zA-Z0-9_]'
-let s:aTags = '[f]'
+let s:aChar = '[a-zA-Z0-9_#]'
+let s:aTags = '[fm]'
 
-let s:aType = {}
-let s:aPath = {}
-let s:aDict = {}
+let s:types = {}
+let s:paths = {}
+let s:dicts = {}
 " ================================== }}} Conf ==================================
 
 " ================================== Apis {{{ ==================================
+"
 function! AGetUserDict(...)
-    if a:0 < 1
-        return s:aDict
-    endif
-
-    return s:Init(a:1) ? s:aDict[a:1] : {}
+    let type = a:0 > 0 ? a:1 : s:GetFileType()
+    return s:LocUserDict(type) ? s:dicts[type] : {}
 endf
 
-function! ASetCompFunc(...)
-    let type = a:0 > 0 ? a:1 : s:Fext()
-
-    if !has_key(s:aType, type)
-        if filereadable(expand(substitute(globpath(&rtp, 'plugin/assistant/'), "\n", ',', 'g').type.'.dict.txt'))
-            let s:aType[type] = type
-        endif
+function! ASetComplete(...)
+    if &cfu != ''
+        return
     endif
 
-    if has_key(s:aType, type)
-        set cfu=AutoCompFunc
+    let type = a:0 > 0 ? a:1 : s:GetFileType()
+    if index(g:assistant_exclude_complete_filetypes, type) < 0
+        set cfu=ARunComplete
     endif
 endf
 
-function! AutoCompFunc(start, base)
-    if a:start
+function! ARunComplete(init, base)
+    if a:init
+        let init = col('.') - 1
         let line = getline('.')
-        let start = col('.') - 1
-        while start > 0 && line[start - 1] =~ s:aChar
-            let start -= 1
+        while init > 0 && line[init - 1] =~ s:aChar
+            let init -= 1
         endwhile
-        return start
+        return init
     else
-        let fext = s:Fext()
-        if !s:Init(fext) || a:base =~ '^\s*$'
+        if a:base =~ '^\s*$'
             return []
         endif
 
+        call s:LocUserDict()
+
+        let type = s:GetFileType()
         let blen = strlen(a:base)
 
         let tags = {}
@@ -86,14 +91,14 @@ function! AutoCompFunc(start, base)
         unl tlst tlen
 
         let dlst = []
-        let keys = keys(s:aDict[s:aType[fext]])
+        let keys = keys(s:dicts[s:types[type]])
         let dlen = len(keys) - 1
         while dlen >= 0
             if strpart(keys[dlen], 0, blen) == a:base
                 if has_key(tags, keys[dlen])
                     call remove(tags, keys[dlen])
                 endif
-                call add(dlst, {'word':keys[dlen], 'menu':s:aDict[s:aType[fext]][keys[dlen]]})
+                call add(dlst, {'word':keys[dlen], 'menu':s:dicts[s:types[type]][keys[dlen]]})
             " elseif len(dlst) " dict file should be sorted first!!
                 " break
             endif
@@ -107,44 +112,41 @@ function! AutoCompFunc(start, base)
 endf
 " ================================== }}} Apis ==================================
 
-" ================================== }}} Main ==================================
-function s:Fext()
+" ================================== Main {{{ ==================================
+"
+function s:GetFileType()
     return getwinvar(winnr(), '&filetype')
-    " return &filetype
-    " return tolower((strridx(expand("%"),".") == -1) ? "" : strpart(expand("%"),(strridx(expand("%"),".") + 1)))
 endf
 
-function s:Init(fext)
-    if !has_key(s:aType, a:fext)
-        return 0
+function s:LocUserDict(...)
+    let type = a:0 < 1 ? s:GetFileType() : a:1
+
+    if !has_key(s:types, type)
+        let s:types[type] = type
     endif
 
-    if !has_key(s:aPath, s:aType[a:fext])
-        let s:aPath[s:aType[a:fext]] = expand(substitute(globpath(&rtp, 'plugin/assistant/'), "\n", ',', 'g').s:aType[a:fext].'.dict.txt')
+    if !has_key(s:paths, s:types[type])
+        let s:paths[s:types[type]] = expand(substitute(globpath(&rtp, 'plugin/assistant/'), "\n", ',', 'g').s:types[type].'.dict.txt')
     endif
 
-    if !has_key(s:aDict, s:aType[a:fext])
-        let s:aDict[s:aType[a:fext]] = {}
+    if !has_key(s:dicts, s:types[type])
+        let s:dicts[s:types[type]] = {}
 
-        if filereadable(s:aPath[s:aType[a:fext]])
-            for line in readfile(s:aPath[s:aType[a:fext]])
-                let mList = matchlist(line, '^\s*\([^ ]\+\)\s*=>\s*\(.\+\)$')
-                if len(mList) >= 3
-                    let s:aDict[s:aType[a:fext]][mList[1]] = mList[2]
+        if s:paths[s:types[type]] != '' && filereadable(s:paths[s:types[type]])
+            for line in readfile(s:paths[s:types[type]])
+                let mtls = matchlist(line, '^\s*\([^ ]\+\)\s\+\(.*[^ ]\)\s*$')
+                if len(mtls) >= 3
+                    let s:dicts[s:types[type]][mtls[1]] = mtls[2]
                 endif
             endfor
         endif
     endif
 
-    return 1
+    return has_key(s:paths, s:types[type]) && s:paths[s:types[type]] != '' ? 1 : 0
 endf
 
-function s:Help()
-    let fext = s:Fext()
-    if !s:Init(fext)
-        echo 'assistant.MIS: Does not support the file type "'.fext.'"'
-        return
-    endif
+function s:PopHelpList()
+    call s:LocUserDict()
 
     let str = getline(".")
     let col = col(".")
@@ -159,7 +161,7 @@ function s:Help()
         let num -= 1
     endw
     if !exists("lcol")
-        echo 'assistant.ERR: The current contents under the cursor is not a keyword'
+        echo 'assistant.ERR: The current content under the cursor is not a keyword'
         return
     endif
 
@@ -172,10 +174,12 @@ function s:Help()
         let num += 1
     endw
 
-    let key = strpart(str, lcol, rcol-lcol+1)
-    let len = len(s:aDict[s:aType[fext]]) - 1
-    let keys = keys(s:aDict[s:aType[fext]])
     let list = []
+    let type = s:GetFileType()
+    let keys = keys(s:dicts[s:types[type]])
+
+    let len = len(keys) - 1
+    let key = strpart(str, lcol, rcol-lcol+1)
 
     let tlst = taglist('^'.key.'$')
     let tlen = len(tlst) - 1
@@ -188,15 +192,13 @@ function s:Help()
 
     while len >= 0
         if keys[len] == key || keys[len] =~ '[\.:]'.key.'$'
-            call add(list, keys[len] . s:aDict[s:aType[fext]][keys[len]])
+            call add(list, keys[len] . s:dicts[s:types[type]][keys[len]])
         endif
         let len -= 1
     endw
 
     echo len(list) > 0 ? join(sort(list), "\n") : 'assistant.MIS: "'.key.'"'
 endf
-
-autocmd Filetype,BufEnter,BufRead * :call ASetCompFunc()
 " ================================== }}} Main ==================================
 " vim:ft=vim:ff=unix:tabstop=4:shiftwidth=4:softtabstop=4:expandtab
 " End of file : assistant.vim
