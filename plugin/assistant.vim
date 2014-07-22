@@ -4,7 +4,7 @@
 "          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2014-07-18
+"      Modified:  2014-07-22
 "       License:  Public Domain
 "   Description:  1. Display the definition of functions, variables, etc(<C-k>).
 "                 2. Complete keywords(<C-x><C-u>).
@@ -76,7 +76,9 @@ function! ARunComplete(init, base)
             return []
         endif
 
-        call s:LocUserDict()
+        if !s:LocUserDict()
+            return []
+        endif
 
         let type = s:GetFileType()
         let blen = strlen(a:base)
@@ -121,6 +123,10 @@ endf
 function s:LocUserDict(...)
     let type = a:0 < 1 ? s:GetFileType() : a:1
 
+    if type == ''
+        return 0
+    endif
+
     if !has_key(s:types, type)
         let s:types[type] = type
     endif
@@ -146,7 +152,10 @@ function s:LocUserDict(...)
 endf
 
 function s:PopHelpList()
-    call s:LocUserDict()
+    if !s:LocUserDict()
+        echo 'assistant.ERR: no filetype'
+        return
+    endif
 
     let str = getline(".")
     let col = col(".")
