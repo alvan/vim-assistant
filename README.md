@@ -5,15 +5,11 @@ Vim script: http://www.vim.org/scripts/script.php?script_id=2805
 
 Display the definition of functions, variables, etc. (Tags, PHP/JS/Vim/...)
 
-1. Use &lt;C-k&gt; to display the definition(load from tags and the dict) of functions, variables, etc.
-2. Use &lt;C-x&gt;&lt;C-u&gt; to complete words.
+#### Usage
 
-Supported dictionary list:
+* press &lt;C-k&gt; to view the definition(load from tags and dict file) of function, variable, etc.
+* press &lt;C-x&gt;&lt;C-u&gt; to complete text.
 
-    php(en_US),
-    vim(zh_CN),
-    f90(zh_CN),
-    ...
 
 #### Install Detail
 
