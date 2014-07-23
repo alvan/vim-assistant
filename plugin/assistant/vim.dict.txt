@@ -1,235 +1,267 @@
-abs ({expr}) 浮点或数值 {expr} 的绝对值
-add ({list}, {item}) 列表 在 |List| {list} 最后附加 {item}
-append ({lnum}, {string}) 数值 在第 {lnum} 行下附加字符串 {string}
-append ({lnum}, {list}) 数值 在第 {lnum} 行下附加行 {list}
-argc () 数值 参数列表的文件数目
-argidx () 数值 参数列表的当前索引
-argv ({nr}) 字符串 参数列表第 {nr} 个参数
-argv () 列表 参数列表
-atan ({expr}) 浮点 {expr} 的反正切值
-browse ({save}, {title}, {initdir}, {default}) 字符串 启动文件请求窗口
-browsedir ({title}, {initdir}) 字符串 启动目录请求窗口
-bufexists ({expr}) 数值 如果缓冲区 {expr} 存在则为真
-buflisted ({expr}) 数值 如果缓冲区 {expr} 在列表内则为真
-bufloaded ({expr}) 数值 如果缓冲区 {expr} 被载入则为真
-bufname ({expr}) 字符串 缓冲区 {expr} 的名字
-bufnr ({expr}) 数值 缓冲区 {expr} 的数目
-bufwinnr ({expr}) 数值 缓冲区 {expr} 的窗口号
-byte2line ({byte}) 数值 第 {byte} 个字节所在的行号
-byteidx ({expr}, {nr}) 数值 {expr} 里第 {nr} 个字符的字节位置
-call ({func}, {arglist} [, {dict}]) 可变 调用函数 {func}，使用参数 {arglist}
-ceil ({expr}) 浮点 {expr} 向上取整
-changenr () 数值 当前改变号
-char2nr ({expr}) 数值 {expr} 里第一个字符串的 ASCII 值
-cindent ({lnum}) 数值 第 {lnum} 行的 C 缩进
-clearmatches () 无 清除所有的匹配
-col ({expr}) 数值 光标或位置标记的列号
-complete ({startcol}, {matches}) 字符串 设置插入模式补全
-complete_add ({expr}) 数值 增加补全匹配
-complete_check () 数值 补全时检查输入的键
-confirm ({msg} [, {choices} [, {default} [, {type}]]]) 数值 用户选择的序号
-copy ({expr}) 可变 提供 {expr} 的浅备份
-cos ({expr}) 浮点 {expr} 的余弦值
-count ({list}, {expr} [, {start} [, {ic}]]) 数值 计算 {list} 里有多少个 {expr}
-cscope_connection ([{num} , {dbpath} [, {prepend}]]) 数值 检查 cscope 连接是否存在
-cursor ({lnum}, {col} [, {coladd}]) 数值 移动光标到 {lnum}，{col}，{coladd}
-cursor ({list}) 数值 移动光标到 {list} 里的位置
-deepcopy ({expr}) 可变 提供 {expr} 的完整备份
-delete ({fname}) 数值 删除文件 {fname}
-did_filetype () 数值 如果使用过 FileType 自动命令事件则为真
-diff_filler ({lnum}) 数值 {lnum} 行之上的 diff 填充行数
-diff_hlID ({lnum}, {col}) 数值 {lnum}/{col} 位置的 diff 高亮
-empty ({expr}) 数值 如果 {expr} 为空则为真
-escape ({string}, {chars}) 字符串 在 {string} 里用 '\' 转义 {chars}
-eval ({string}) 可变 计算 {string}，返回结果
-eventhandler () 数值 如果在事件处理中则为真
-executable ({expr}) 数值 如果可执行文件 {expr} 存在则为 1
-exists ({expr}) 数值 如果 {expr} 存在则为真
-extend ({expr1}, {expr2} [, {expr3}]) 列表/字典 把 {expr2} 里的项目插入 {expr1}
-expand ({expr}) 字符串 扩展 {expr} 里的特殊关键字
-feedkeys ({string} [, {mode}]) 数值 给预输入缓冲区加入键序列
-filereadable ({file}) 数值 如果 {file} 是个可读文件则为真
-filewritable ({file}) 数值 如果 {file} 是个可写文件则为真
-filter ({expr}, {string}) 列表/字典 删除 {expr} 里 {string} 为 0 的项目
-finddir ({name}[, {path}[, {count}]]) 字符串 在 {path} 里寻找目录 {name}
-findfile ({name}[, {path}[, {count}]]) 字符串 在 {path} 里寻找文件 {name}
-float2nr ({expr}) 数值 转换浮点数 {expr} 为数值
-floor ({expr}) 浮点 {expr} 向下取整
-fnameescape ({fname}) 字符串 转义 {fname} 中的特殊字符
-fnamemodify ({fname}, {mods}) 字符串 修改文件名
-foldclosed ({lnum}) 数值 {lnum} 所在折叠的首行，如果是关闭的话
-foldclosedend ({lnum}) 数值 {lnum} 所在折叠的末行，如果是关闭的话
-foldlevel ({lnum}) 数值 {lnum} 的折叠级别
-foldtext () 字符串 关闭的折叠显示的行
-foldtextresult ({lnum}) 字符串 {lnum} 所在的关闭的折叠的文本
-foreground () 数值 把 Vim 窗口带到前台
-function ({name}) 函数引用 函数 {name} 的引用
-garbagecollect ([at_exit]) 无 释放内存，打破循环引用
-get ({list}, {idx} [, {def}]) 可变 得到 {list} 或 {def} 的项目 {idx}
-get ({dict}, {key} [, {def}]) 可变 得到 {dict} 或 {def} 的项目 {idx}
-getbufline ({expr}, {lnum} [, {end}]) 列表 缓冲区 {expr} 第 {lnum} 到 {end} 行
-getbufvar ({expr}, {varname}) 可变 缓冲区 {expr} 的变量 {varname}
-getchar ([expr]) 数值 让用户输入一个字符
-getcharmod () 数值 最近输入字符的修饰符
-getcmdline () 字符串 返回当前命令行
-getcmdpos () 数值 返回命令行的光标位置
-getcmdtype () 字符串 返回当前命令行类型
-getcwd () 字符串 当前工作目录
-getfperm ({fname}) 字符串 文件 {fname} 的文件权限
-getfsize ({fname}) 数值 字节计算的文件 {fname} 大小
-getfontname ([{name}]) 字符串 使用的字体名
-getftime ({fname}) 数值 文件的最新修改时间
-getftype ({fname}) 字符串 文件 {fname} 类型的描述
-getline ({lnum}) 字符串 当前缓冲区的第 {lnum} 行
-getline ({lnum}, {end}) 列表 当前缓冲区第 {lnum} 到 {end} 行
-getloclist ({nr}) 列表 位置列表项目的列表
-getmatches () 列表 当前匹配的列表
-getpid () 数值 Vim 的进程号
-getpos ({expr}) 列表 光标、位置标记等的位置
-getqflist () 列表 quickfix 项目的列表
-getreg ([{regname} [, 1]]) 字符串 寄存器内容
-getregtype ([{regname}]) 字符串 寄存器类型
-gettabwinvar ({tabnr}, {winnr}, {name}) 可变 {tabnr} 标签页 {winnr} 窗口的 {name}
-getwinposx () 数值 GUI Vim 窗口以像素计的 X 坐标
-getwinposy () 数值 GUI Vim 窗口以像素计的 Y 坐标
-getwinvar ({nr}, {varname}) 可变 窗口 {expr} 的变量 {varname}
-glob ({expr}) 字符串 扩展 {expr} 里的文件通配符
-globpath ({path}, {expr}) 字符串 在 {path} 所有目录下执行 glob({expr})
-has ({feature}) 数值 如果支持特性 {feature} 则为真
-has_key ({dict}, {key}) 数值 如果 {dict} 有项目 {key} 则为真
-haslocaldir () 数值 如果当前窗口执行过 |:lcd|
-hasmapto ({what} [, {mode} [, {abbr}]]) 数值 如果 {what} 的映射存在则为真
-histadd ({history},{item}) 字符串 在历史里增加项目
-histdel ({history} [, {item}]) 字符串 从历史里删除项目
-histget ({history} [, {index}]) 字符串 得到历史的第 {index} 项
-histnr ({history}) 数值 历史里最高的项目号
-hlexists ({name}) 数值 如果高亮组 {name} 存在则为真
-hlID ({name}) 数值 高亮组 {name} 的语法 ID
-hostname () 字符串 Vim 运行的机器名字
-iconv ({expr}, {from}, {to}) 字符串 转换 {expr} 的编码
-indent ({lnum}) 数值 第 {lnum} 行的缩进
-index ({list}, {expr} [, {start} [, {ic}]]) 数值 {list} 列表里出现 {expr} 的项目的索引
-input ({prompt} [, {text} [, {completion}]]) 字符串 从用户得到输入
-inputdialog ({p} [, {t} [, {c}]]) 字符串 类似于 input()，但使用 GUI 对话框
-inputlist ({textlist}) 数值 让用户从选择列表里挑选
-inputrestore () 数值 恢复预输入
-inputsave () 数值 保存和清除预输入
-inputsecret ({prompt} [, {text}]) 字符串 类似于 input()，但隐藏文本
-insert ({list}, {item} [, {idx}]) 列表 在 {list} 里插入 {item} [{idx} 之前]
-isdirectory ({directory}) 数值 如果 {directory} 是目录则为真
-islocked ({expr}) 数值 如果 {expr} 被锁住则为真
-items ({dict}) 列表 {dict} 里的键-值组对
-join ({list} [, {sep}]) 字符串 连接 {list} 的项目成为一个字符串
-keys ({dict}) 列表 {dict} 的所有键
-len ({expr}) 数值 {expr} 的长度
-libcall ({lib}, {func}, {arg}) 字符串 调用库 {lib} 的函数 {func}，使用参数
- {arg}
-libcallnr ({lib}, {func}, {arg}) 数值 同上，但返回数值
-line ({expr}) 数值 光标所在、末行或者位置标记所在的行号
-line2byte ({lnum}) 数值 行 {lnum} 的字节位置
-lispindent ({lnum}) 数值 行 {lnum} 的 Lisp 缩进
-localtime () 数值 当前时间
-log10 ({expr}) 浮点 {expr} 以 10 为底的对数
-map ({expr}, {string}) 列表/字典 {expr} 的每个项目改变为 {string}
-maparg ({name}[, {mode} [, {abbr}]]) 字符串 模式 {mode} 的映射 {name} 的右边
-mapcheck ({name}[, {mode} [, {abbr}]]) 字符串 检查匹配 {name} 的映射
-match ({expr}, {pat}[, {start}[, {count}]]) 数值 {expr} 里 {pat} 的匹配位置
-matchadd ({group}, {pattern}[, {priority}[, {id}]]) 数值 用 {group} 高亮 {pattern}
-matcharg ({nr}) 列表 |:match| 的参数
-matchdelete ({id}) 数值 删除 {id} 指定的匹配
-matchend ({expr}, {pat}[, {start}]) 数值 {expr} 里 {pat} 的结束位置
-matchlist ({expr}, {pat}[, {start}[, {count}]]) 列表 {expr} 里 {pat} 的匹配和子匹配
-matchstr ({expr}, {pat}[, {start}[, {count}]]) 字符串 第 {count} 个 {expr} 里 {pat} 的匹配文 本
-max ({list}) 数值 {list} 的项目的最大值
-min ({list}) 数值 {list} 的项目的最小值
-mkdir ({name} [, {path} [, {prot}]]) 数值 建立目录 {name}
-mode ([expr]) 字符串 当前编辑模式
-nextnonblank ({lnum}) 数值 第一个大于等于 {lnum} 的非空白行的行号
-nr2char ({expr}) 字符串 ASCII 值为 {expr} 的单个字符
-pathshorten ({expr}) 字符串 缩短路径里的目录名
-pow ({x}, {y}) 浮点 {x} 的 {y} 次方
-prevnonblank ({lnum}) 数值 最后一个小于等于 {lnum} 的非空白行的行号
-printf ({fmt}, {expr1}...) 字符串 排版文本
-pumvisible () 数值 弹出窗口是否可见
-range ({expr} [, {max} [, {stride}]]) 列表 从 {expr} 到 {max} 的序列
-readfile ({fname} [, {binary} [, {max}]]) 列表 得到文件 {fname} 的行列表
-reltime ([{start} [, {end}]]) 列表 得到时间值
-reltimestr ({time}) 字符串 把时间值转化为字符串
-remote_expr ({server}, {string} [, {idvar}]) 字符串 发送表达式
-remote_foreground ({server}) 数值 把 Vim 服务器带到前台
-remote_peek ({serverid} [, {retvar}]) 数值 检查应答字符串
-remote_read ({serverid}) 字符串 读入应答字符串
-remote_send ({server}, {string} [, {idvar}]) 字符串 发送键序列
-remove ({list}, {idx} [, {end}]) 可变 从 {list} 里删除项目 {idx}-{end}
-remove ({dict}, {key}) 可变 从 {dict} 里删除项目 {key}
-rename ({from}, {to}) 数值 换名 (移动) 文件，从 {from} 到 {to}
-repeat ({expr}, {count}) 字符串 重复 {expr} {count} 次
-resolve ({filename}) 字符串 解析快捷方式对应的文件名
-reverse ({list}) 列表 反转 {list}，直接修改 {list}
-round ({expr}) 浮点 {expr} 四舍五入
-search ({pattern} [, {flags} [, {stopline} [, {timeout}]]]) 数值 搜索 {pattern}
-searchdecl ({name} [, {global} [, {thisblock}]]) 数值 搜索变量声明
-searchpair ({start}, {middle}, {end} [, {flags} [, {skip} [...]]]) 数值 搜索 start/end 对的另一侧
-searchpairpos ({start}, {middle}, {end} [, {flags} [, {skip} [...]]]) 列表 搜索 start/end 队的另一侧
-searchpos ({pattern} [, {flags} [, {stopline} [, {timeout}]]]) 列表 搜索 {pattern}
-server2client ({clientid}, {string}) 数值 发送应答字符串
-serverlist () 字符串 得到可用的服务器列表
-setbufvar ({expr}, {varname}, {val}) 设置缓冲区 {expr} 的 {varname} 为 {val}
-setcmdpos ({pos}) 数值 设置命令行的光标位置
-setline ({lnum}, {line}) 数值 设置第 {lnum} 行的内容为 {line}
-setloclist ({nr}, {list}[, {action}]) 数值 用 {list} 修改位置列表
-setmatches ({list}) 数值 还原匹配列表
-setpos ({expr}, {list}) 无 设置 {expr} 的位置为 {list}
-setqflist ({list}[, {action}]) 数值 用 {list} 修改 quickfix 列表
-setreg ({n}, {v}[, {opt}]) 数值 设置寄存器的值和类型
-settabwinvar ({tabnr}, {winnr}, {varname}, {val}) 无 设置标签页 {tabnr} 窗口 {winnr} 的 {varname} 变量为 {val}
-setwinvar ({nr}, {varname}, {val}) 设置窗口 {expr} 的 {varname} 为 {val}
-shellescape ({string} [, {special}]) 字符串 转义 {string} 以便用作外壳命令的参数
-simplify ({filename}) 字符串 尽可能简化文件名
-sin ({expr}) 浮点 {expr} 的正弦值
-sort ({list} [, {func}]) 列表 排序 {list}，用比较函数 {func}
-soundfold ({word}) 字符串 按发音折叠 {word}
-spellbadword () 字符串 光标所在的拼写错误的单词
-spellsuggest ({word} [, {max} [, {capital}]]) 列表 拼写建议
-split ({expr} [, {pat} [, {keepempty}]]) 列表 从 {pat} 分割的 {expr} 里构造 |List|
-sqrt ({expr} 浮点 {expr} 的平方根
-str2float ({expr}) 浮点 转换字符串为浮点数
-str2nr ({expr} [, {base}]) 数值 把字符串转换为数值
-strftime ({format}[, {time}]) 字符串 指定格式的时间
-stridx ({haystack}, {needle}[, {start}]) 数值 {haystack} 里 {needle} 的位置
-string ({expr}) 字符串 {expr} 值得字符串表示
-strlen ({expr}) 数值 字符串 {expr} 的长度
-strpart ({src}, {start}[, {len}]) 字符串 {src} 从 {start} 开始的 {len} 个字节
-strridx ({haystack}, {needle} [, {start}]) 数值 {haystack} 里最后一个 {needle} 的位置
-strtrans ({expr}) 字符串 翻译字符串，使之可以显示
-submatch ({nr}) 字符串 ":substitute" 的特定匹配
-substitute ({expr}, {pat}, {sub}, {flags}) 字符串 {expr} 里的所有 {pat} 被 {sub} 替代
-synID ({lnum}, {col}, {trans}) 数值 {lnum} 行 {col} 列所在的语法 ID
-synIDattr ({synID}, {what} [, {mode}]) 字符串 syntax ID {synID} 的 {what} 属性
-synIDtrans ({synID}) 数值 {synID} 经过翻译的语法 ID
-synstack ({lnum}, {col}) 列表 {lnum}行 {col} 列所在的语法 ID 堆栈
-system ({expr} [, {input}]) 字符串 外壳命令/过滤 {expr} 的输出
-tabpagebuflist ([{arg}]) 列表 标签页里的缓冲区号列表
-tabpagenr ([{arg}]) 数值 当前或最后标签页的编号
-tabpagewinnr ({tabarg}[, {arg}]) 数值 标签页里当前窗口的编号
-taglist ({expr}) 列表 匹配 {expr} 的标签列表
-tagfiles () 列表 使用的标签文件
-tempname () 字符串 临时文件的文件名
-tolower ({expr}) 字符串 字符串 {expr} 变为小写
-toupper ({expr}) 字符串 字符串 {expr} 变为大写
-tr ({src}, {fromstr}, {tostr}) 字符串 把 {src} 里的 {fromstr} 字符翻译为 {tostr} 字符
-trunc ({expr} 浮点 浮点数 {expr} 截断小数点
-type ({name}) 数值 变量 {name} 的类型
-values ({dict}) 列表 {dict} 的所有值
-virtcol ({expr}) 数值 光标或位置标记的屏幕列
-visualmode ([expr]) 字符串 最近使用的可视模式
-winbufnr ({nr}) 数值 窗口 {nr} 的缓冲区号
-wincol () 数值 光标所在的窗口列
-winheight ({nr}) 数值 窗口 {nr} 的高度
-winline () 数值 光标所在的窗口行
-winnr ([{expr}]) 数值 当前窗口的编号
-winrestcmd () 字符串 返回恢复窗口大小的命令
-winrestview ({dict}) 无 恢复当前窗口的视图
-winsaveview () 字典 保存当前窗口的视图
-winwidth ({nr}) 数值 窗口 {nr} 的宽度
-writefile ({list}, {fname} [, {binary}]) 数值 把行列表写到文件 {fname}
+abs ({expr}) | Float or Number, absolute value of {expr}
+acos ({expr}) | Float, arc cosine of {expr}
+add ({list}, {item}) | List, append {item} to |List| {list}
+and ({expr}, {expr}) | Number, bitwise AND
+append ({lnum}, {string}) | Number, append {string} below line {lnum}
+append ({lnum}, {list}) | Number, append lines {list} below line {lnum}
+argc () | Number, number of files in the argument list
+argidx () | Number, current index in the argument list
+argv ({nr}) | String, {nr} entry of the argument list
+argv () | List, the argument list
+asin ({expr}) | Float, arc sine of {expr}
+atan ({expr}) | Float, arc tangent of {expr}
+atan2 ({expr}, {expr}) | Float, arc tangent of {expr1} / {expr2}
+browse ({save}, {title}, {initdir}, {default}) | String, put up a file requester
+browsedir ({title}, {initdir}) | String, put up a directory requester
+bufexists ({expr}) | Number, TRUE if buffer {expr} exists
+buflisted ({expr}) | Number, TRUE if buffer {expr} is listed
+bufloaded ({expr}) | Number, TRUE if buffer {expr} is loaded
+bufname ({expr}) | String, Name of the buffer {expr}
+bufnr ({expr}) | Number, Number of the buffer {expr}
+bufwinnr ({expr}) | Number, window number of buffer {expr}
+byte2line ({byte}) | Number, line number at byte count {byte}
+byteidx ({expr}, {nr}) | Number, byte index of {nr}'th char in {expr}
+call ({func}, {arglist} [, {dict}]) | any, call {func} with arguments {arglist}
+ceil ({expr}) | Float, round {expr} up
+changenr () | Number, current change number
+char2nr ({expr}[, {utf8}]) | Number, ASCII/UTF8 value of first char in {expr}
+cindent ({lnum}) | Number, C indent for line {lnum}
+clearmatches () | none, clear all matches
+col ({expr}) | Number, column nr of cursor or mark
+complete ({startcol}, {matches}) | none, set Insert mode completion
+complete_add ({expr}) | Number, add completion match
+complete_check () | Number, check for key typed during completion
+confirm ({msg} [, {choices} [, {default} [, {type}]]]) | Number, number of choice picked by user
+copy ({expr}) | any, make a shallow copy of {expr}
+cos ({expr}) | Float, cosine of {expr}
+cosh ({expr}) | Float, hyperbolic cosine of {expr}
+count ({list}, {expr} [, {start} [, {ic}]]) | Number,, count how many {expr} are in {list}
+cscope_connection ([{num} , {dbpath} [, {prepend}]]) | Number, checks existence of cscope connection
+cursor ({lnum}, {col} [, {coladd}]) | Number, move cursor to {lnum}, {col}, {coladd}
+cursor ({list}) | Number, move cursor to position in {list}
+deepcopy ({expr}) | any, make a full copy of {expr}
+delete ({fname}) | Number, delete file {fname}
+did_filetype () | Number, TRUE if FileType autocommand event used
+diff_filler ({lnum}) | Number, diff filler lines about {lnum}
+diff_hlID ({lnum}, {col}) | Number, diff highlighting at {lnum}/{col}
+empty ({expr}) | Number, TRUE if {expr} is empty
+escape ({string}, {chars}) | String, escape {chars} in {string} with '\'
+eval ({string}) | any, evaluate {string} into its value
+eventhandler () | Number, TRUE if inside an event handler
+executable ({expr}) | Number, 1 if executable {expr} exists
+exists ({expr}) | Number, TRUE if {expr} exists
+extend ({expr1}, {expr2} [, {expr3}]) | List/Dict insert items of {expr2} into {expr1}
+exp ({expr}) | Float, exponential of {expr}
+expand ({expr} [, {nosuf} [, {list}]]) | any, expand special keywords in {expr}
+feedkeys ({string} [, {mode}]) | Number, add key sequence to typeahead buffer
+filereadable ({file}) | Number, TRUE if {file} is a readable file
+filewritable ({file}) | Number, TRUE if {file} is a writable file
+filter ({expr}, {string}) | List/Dict, remove items from {expr} where {string} is 0
+finddir ({name}[, {path}[, {count}]]) | String, find directory {name} in {path}
+findfile ({name}[, {path}[, {count}]]) | String, find file {name} in {path}
+float2nr ({expr}) | Number, convert Float {expr} to a Number
+floor ({expr}) | Float, round {expr} down
+fmod ({expr1}, {expr2}) | Float, remainder of {expr1} / {expr2}
+fnameescape ({fname}) | String, escape special characters in {fname}
+fnamemodify ({fname}, {mods}) | String, modify file name
+foldclosed ({lnum}) | Number, first line of fold at {lnum} if closed
+foldclosedend ({lnum}) | Number, last line of fold at {lnum} if closed
+foldlevel ({lnum}) | Number, fold level at {lnum}
+foldtext () | String, line displayed for closed fold
+foldtextresult ({lnum}) | String, text for closed fold at {lnum}
+foreground () | Number, bring the Vim window to the foreground
+function ({name}) | Funcref reference to function {name}
+garbagecollect ([{atexit}]) | none, free memory, breaking cyclic references
+get ({list}, {idx} [, {def}]) | any, get item {idx} from {list} or {def}
+get ({dict}, {key} [, {def}]) | any, get item {key} from {dict} or {def}
+getbufline ({expr}, {lnum} [, {end}]) | List, lines {lnum} to {end} of buffer {expr}
+getbufvar ({expr}, {varname} [, {def}]) | any, variable {varname} in buffer {expr}
+getchar ([expr]) | Number, get one character from the user
+getcharmod () | Number, modifiers for the last typed character
+getcmdline () | String, return the current command-line
+getcmdpos () | Number, return cursor position in command-line
+getcmdtype () | String, return the current command-line type
+getcwd () | String, the current working directory
+getfperm ({fname}) | String, file permissions of file {fname}
+getfsize ({fname}) | Number, size in bytes of file {fname}
+getfontname ([{name}]) | String, name of font being used
+getftime ({fname}) | Number, last modification time of file
+getftype ({fname}) | String, description of type of file {fname}
+getline ({lnum}) | String, line {lnum} of current buffer
+getline ({lnum}, {end}) | List, lines {lnum} to {end} of current buffer
+getloclist ({nr}) | List, list of location list items
+getmatches () | List, list of current matches
+getpid () | Number, process ID of Vim
+getpos ({expr}) | List, position of cursor, mark, etc.
+getqflist () | List, list of quickfix items
+getreg ([{regname} [, 1]]) | String, contents of register
+getregtype ([{regname}]) | String, type of register
+gettabvar ({nr}, {varname} [, {def}]) | any, variable {varname} in tab {nr} or {def}
+gettabwinvar ({tabnr}, {winnr}, {name} [, {def}]) | any, {name} in {winnr} in tab page {tabnr}
+getwinposx () | Number, X coord in pixels of GUI Vim window
+getwinposy () | Number, Y coord in pixels of GUI Vim window
+getwinvar ({nr}, {varname} [, {def}]) | any, variable {varname} in window {nr}
+glob ({expr} [, {nosuf} [, {list}]]) | any, expand file wildcards in {expr}
+globpath ({path}, {expr} [, {flag}]) | String, do glob({expr})for all dirs in {path}
+has ({feature}) | Number, TRUE if feature {feature} supported
+has_key ({dict}, {key}) | Number, TRUE if {dict} has entry {key}
+haslocaldir () | Number, TRUE if current window executed |:lcd|
+hasmapto ({what} [, {mode} [, {abbr}]]) | Number, TRUE if mapping to {what} exists
+histadd ({history},{item}) | String, add an item to a history
+histdel ({history} [, {item}]) | String, remove an item from a history
+histget ({history} [, {index}]) | String, get the item {index} from a history
+histnr ({history}) | Number, highest index of a history
+hlexists ({name}) | Number, TRUE if highlight group {name} exists
+hlID ({name}) | Number, syntax ID of highlight group {name}
+hostname () | String, name of the machine Vim is running on
+iconv ({expr}, {from}, {to}) | String, convert encoding of {expr}
+indent ({lnum}) | Number, indent of line {lnum}
+index ({list}, {expr} [, {start} [, {ic}]]) | Number, index in {list} where {expr} appears
+input ({prompt} [, {text} [, {completion}]]) | String, get input from the user
+inputdialog ({p} [, {t} [, {c}]]) | String, like input()but in a GUI dialog
+inputlist ({textlist}) | Number, let the user pick from a choice list
+inputrestore () | Number, restore typeahead
+inputsave () | Number, save and clear typeahead
+inputsecret ({prompt} [, {text}]) | String, like input()but hiding the text
+insert ({list}, {item} [, {idx}]) | List, insert {item} in {list} [before {idx}]
+invert ({expr}) | Number, bitwise invert
+isdirectory ({directory}) | Number, TRUE if {directory} is a directory
+islocked ({expr}) | Number, TRUE if {expr} is locked
+items ({dict}) | List, key-value pairs in {dict}
+join ({list} [, {sep}]) | String, join {list} items into one String
+keys ({dict}) | List, keys in {dict}
+len ({expr}) | Number, the length of {expr}
+libcall ({lib}, {func}, {arg}) | String, call {func} in library {lib} with {arg}
+libcallnr ({lib}, {func}, {arg}) | Number, idem, but return a Number
+line ({expr}) | Number, line nr of cursor, last line or mark
+line2byte ({lnum}) | Number, byte count of line {lnum}
+lispindent ({lnum}) | Number, Lisp indent for line {lnum}
+localtime () | Number, current time
+log ({expr}) | Float, natural logarithm(base e)of {expr}
+log10 ({expr}) | Float, logarithm of Float {expr} to base 10
+luaeval ({expr}[, {expr}]) | any, evaluate |Lua| expression
+map ({expr}, {string}) | List/Dict, change each item in {expr} to {expr}
+maparg ({name}[, {mode} [, {abbr} [, {dict}]]]) | String or Dict rhs of mapping {name} in mode {mode}
+mapcheck ({name}[, {mode} [, {abbr}]]) | String, check for mappings matching {name}
+match ({expr}, {pat}[, {start}[, {count}]]) | Number, position where {pat} matches in {expr}
+matchadd ({group}, {pattern}[, {priority}[, {id}]]) | Number, highlight {pattern} with {group}
+matcharg ({nr}) | List, arguments of |:match|
+matchdelete ({id}) | Number, delete match identified by {id}
+matchend ({expr}, {pat}[, {start}[, {count}]]) | Number, position where {pat} ends in {expr}
+matchlist ({expr}, {pat}[, {start}[, {count}]]) | List, match and submatches of {pat} in {expr}
+matchstr ({expr}, {pat}[, {start}[, {count}]]) | String, {count}'th match of {pat} in {expr}
+max ({list}) | Number, maximum value of items in {list}
+min ({list}) | Number, minimum value of items in {list}
+mkdir ({name} [, {path} [, {prot}]]) | Number, create directory {name}
+mode ([expr]) | String, current editing mode
+mzeval ({expr}) | any, evaluate |MzScheme| expression
+nextnonblank ({lnum}) | Number, line nr of non-blank line >= {lnum}
+nr2char ({expr}[, {utf8}]) | String, single char with ASCII/UTF8 value {expr}
+or ({expr}, {expr}) | Number, bitwise OR
+pathshorten ({expr}) | String, shorten directory names in a path
+pow ({x}, {y}) | Float, {x} to the power of {y}
+prevnonblank ({lnum}) | Number, line nr of non-blank line <= {lnum}
+printf ({fmt}, {expr1}...) | String, format text
+pumvisible () | Number, whether popup menu is visible
+pyeval ({expr}) | any, evaluate |Python| expression
+py3eval ({expr}) | any, evaluate |python3| expression
+range ({expr} [, {max} [, {stride}]]) | List, items from {expr} to {max}
+readfile ({fname} [, {binary} [, {max}]]) | List, get list of lines from file {fname}
+reltime ([{start} [, {end}]]) | List, get time value
+reltimestr ({time}) | String, turn time value into a String
+remote_expr ({server}, {string} [, {idvar}]) | String, send expression
+remote_foreground ({server}) | Number, bring Vim server to the foreground
+remote_peek ({serverid} [, {retvar}]) | Number, check for reply string
+remote_read ({serverid}) | String, read reply string
+remote_send ({server}, {string} [, {idvar}]) | String, send key sequence
+remove ({list}, {idx} [, {end}]) | any, remove items {idx}-{end} from {list}
+remove ({dict}, {key}) | any, remove entry {key} from {dict}
+rename ({from}, {to}) | Number, rename(move)file from {from} to {to}
+repeat ({expr}, {count}) | String, repeat {expr} {count} times
+resolve ({filename}) | String, get filename a shortcut points to
+reverse ({list}) | List, reverse {list} in-place
+round ({expr}) | Float, round off {expr}
+screenattr ({row}, {col}) | Number, attribute at screen position
+screenchar ({row}, {col}) | Number, character at screen position
+screencol () | Number, current cursor column
+screenrow () | Number, current cursor row
+search ({pattern} [, {flags} [, {stopline} [, {timeout}]]]) | Number, search for {pattern}
+searchdecl ({name} [, {global} [, {thisblock}]]) | Number, search for variable declaration
+searchpair ({start}, {middle}, {end} [, {flags} [, {skip} [...]]]) | Number, search for other end of start/end pair
+searchpairpos ({start}, {middle}, {end} [, {flags} [, {skip} [...]]]) | List, search for other end of start/end pair
+searchpos ({pattern} [, {flags} [, {stopline} [, {timeout}]]]) | List, search for {pattern}
+server2client ({clientid}, {string}) | Number, send reply string
+serverlist () | String, get a list of available servers
+setbufvar ({expr}, {varname}, {val}) | set {varname} in buffer {expr} to {val}
+setcmdpos ({pos}) | Number, set cursor position in command-line
+setline ({lnum}, {line}) | Number, set line {lnum} to {line}
+setloclist ({nr}, {list}[, {action}]) | Number, modify location list using {list}
+setmatches ({list}) | Number, restore a list of matches
+setpos ({expr}, {list}) | Number, set the {expr} position to {list}
+setqflist ({list}[, {action}]) | Number, modify quickfix list using {list}
+setreg ({n}, {v}[, {opt}]) | Number, set register to value and type
+settabvar ({nr}, {varname}, {val}) | set {varname} in tab page {nr} to {val}
+settabwinvar ({tabnr}, {winnr}, {varname}, {val}) | set {varname} in window {winnr} in tab page {tabnr} to {val}
+setwinvar ({nr}, {varname}, {val}) | set {varname} in window {nr} to {val}
+sha256 ({string}) | String, SHA256 checksum of {string}
+shellescape ({string} [, {special}]) | String, escape {string} for use as shell command argument
+shiftwidth () | Number, effective value of 'shiftwidth'
+simplify ({filename}) | String, simplify filename as much as possible
+sin ({expr}) | Float, sine of {expr}
+sinh ({expr}) | Float, hyperbolic sine of {expr}
+sort ({list} [, {func} [, {dict}]]) | List, sort {list}, using {func} to compare
+soundfold ({word}) | String, sound-fold {word}
+spellbadword () | String, badly spelled word at cursor
+spellsuggest ({word} [, {max} [, {capital}]]) | List, spelling suggestions
+split ({expr} [, {pat} [, {keepempty}]]) | List, make |List| from {pat} separated {expr}
+sqrt ({expr}) | Float, square root of {expr}
+str2float ({expr}) | Float, convert String to Float
+str2nr ({expr} [, {base}]) | Number, convert String to Number
+strchars ({expr}) | Number, character length of the String {expr}
+strdisplaywidth ({expr} [, {col}]) | Number display length of the String {expr}
+strftime ({format}[, {time}]) | String, time in specified format
+stridx ({haystack}, {needle}[, {start}]) | Number, index of {needle} in {haystack}
+string ({expr}) | String, String representation of {expr} value
+strlen ({expr}) | Number, length of the String {expr}
+strpart ({src}, {start}[, {len}]) | String, {len} characters of {src} at {start}
+strridx ({haystack}, {needle} [, {start}]) | Number, last index of {needle} in {haystack}
+strtrans ({expr}) | String, translate string to make it printable
+strwidth ({expr}) | Number, display cell length of the String {expr}
+submatch ({nr}) | String, specific match in ":s" or substitute()
+substitute ({expr}, {pat}, {sub}, {flags}) | String, all {pat} in {expr} replaced with {sub}
+synID ({lnum}, {col}, {trans}) | Number, syntax ID at {lnum} and {col}
+synIDattr ({synID}, {what} [, {mode}]) | String, attribute {what} of syntax ID {synID}
+synIDtrans ({synID}) | Number, translated syntax ID of {synID}
+synconcealed ({lnum}, {col}) | List, info about concealing
+synstack ({lnum}, {col}) | List, stack of syntax IDs at {lnum} and {col}
+system ({expr} [, {input}]) | String, output of shell command/filter {expr}
+tabpagebuflist ([{arg}]) | List, list of buffer numbers in tab page
+tabpagenr ([{arg}]) | Number, number of current or last tab page
+tabpagewinnr ({tabarg}[, {arg}]) | Number, number of current window in tab page
+taglist ({expr}) | List, list of tags matching {expr}
+tagfiles () | List, tags files used
+tempname () | String, name for a temporary file
+tan ({expr}) | Float, tangent of {expr}
+tanh ({expr}) | Float, hyperbolic tangent of {expr}
+tolower ({expr}) | String, the String {expr} switched to lowercase
+toupper ({expr}) | String, the String {expr} switched to uppercase
+tr ({src}, {fromstr}, {tostr}) | String, translate chars of {src} in {fromstr} to chars in {tostr}
+trunc ({expr}) | Float, truncate Float {expr}
+type ({name}) | Number, type of variable {name}
+undofile ({name}) | String, undo file name for {name}
+undotree () | List, undo file tree
+values ({dict}) | List, values in {dict}
+virtcol ({expr}) | Number, screen column of cursor or mark
+visualmode ([expr]) | String, last visual mode used
+wildmenumode () | Number, whether 'wildmenu' mode is active
+winbufnr ({nr}) | Number, buffer number of window {nr}
+wincol () | Number, window column of the cursor
+winheight ({nr}) | Number, height of window {nr}
+winline () | Number, window line of the cursor
+winnr ([{expr}]) | Number, number of current window
+winrestcmd () | String, returns command to restore window sizes
+winrestview ({dict}) | none, restore view of current window
+winsaveview () | Dict, save view of current window
+winwidth ({nr}) | Number, width of window {nr}
+writefile ({list}, {fname} [, {binary}]) | Number, write list of lines to file {fname}
+xor ({expr}, {expr}) | Number, bitwise XOR
