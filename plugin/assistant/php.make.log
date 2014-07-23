@@ -1,0 +1,40 @@
+[2014-07-23]
+------------
+Make a PHP builtin functions dict.
+
+To create from scratch list of functions:
+
+1. Download multi html file PHP documentation (http://php.net/get/php_manual_en.tar.gz/from/a/mirror)
+
+2. Extract it and cd into the target directory.
+
+3. run in terminal:
+
+    for i in `ls | grep "^function\."`; do grep "<div class=\"methodsynopsis dc-description\">" -A99 $i | grep "</div>" -B99 -m1 >> php.dict.txt; done
+
+4. Open php.dict.txt in Vim and:
+
+    a. remove all html tags
+        :%s/<[^>]\+>//g
+
+    b. remove all blank lines
+        :g/^\s*$/d
+        :%s/\s*$//g
+
+    c. merge into one line
+        :%s/\([^)]\)\n/\1/g
+        :%s/^\s*//
+        :g/^[^a-z0-9A-Z]/normal! kJ
+
+    d. remove virtual functions do not declare a return value
+        :g/^[^ ]\+ (/d
+
+    e. do some work to make pretty format
+        :%s/\s\{2,}/ /g
+        :%s/&lt;/</g
+        :%s/&gt;/>/g
+        :%s/&quot;/"/g
+        :%s/&#039;/'/g
+
+    f. move return value to the end of line.
+        :%s/^\([^ ]\+\)\s\+\(.*\)$/\2 | \1/
