@@ -4,7 +4,7 @@
 "          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2014-07-22
+"      Modified:  2015-05-11
 "       License:  Public Domain
 "   Description:  1. Display the definition of functions, variables, etc(<C-k>).
 "                 2. Complete keywords(<C-x><C-u>).
@@ -23,8 +23,12 @@ if !exists("g:assistant_exclude_complete_filetypes")
     let g:assistant_exclude_complete_filetypes = []
 endif
 
+if !exists("g:assistant_show_help_shortcut")
+    let g:assistant_show_help_shortcut = "<C-k>"
+endif
+
 au Filetype,BufEnter,BufRead * :call ASetComplete()
-nnoremap <silent> <unique> <C-k> :call <SID>PopHelpList()<Cr>
+exec 'nnoremap <silent> <unique> '.g:assistant_show_help_shortcut.' :call <SID>PopHelpList()<Cr>'
 
 " Mapping for Eclipse user
 "
