@@ -1,13 +1,9 @@
 " == "acomment" == {{{
 "
 "          File:  assistant.vim
-"          Path:  ~/.vim/plugin
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2015-05-11
-"       License:  Public Domain
-"   Description:  1. Display the definition of functions, variables, etc(<C-k>).
-"                 2. Complete keywords(<C-x><C-u>).
+"      Modified:  2015-09-28
 "
 " --}}}
 
@@ -15,7 +11,7 @@
 if exists("g:loaded_assistant")
     finish
 endif
-let g:loaded_assistant = "1.5.8"
+let g:loaded_assistant = "1.6"
 
 " ================================== Conf {{{ ==================================
 "
@@ -136,23 +132,25 @@ function s:LocUserDict(...)
     endif
 
     if !has_key(s:paths, s:types[type])
-        let s:paths[s:types[type]] = expand(substitute(globpath(&rtp, 'plugin/assistant/'), "\n", ',', 'g').s:types[type].'.dict.txt')
+        let s:paths[s:types[type]] = split(globpath(&rtp, 'plugin/assistant/'.s:types[type].'.dict.txt'), "\n")
     endif
 
     if !has_key(s:dicts, s:types[type])
         let s:dicts[s:types[type]] = {}
 
-        if s:paths[s:types[type]] != '' && filereadable(s:paths[s:types[type]])
-            for line in readfile(s:paths[s:types[type]])
-                let mtls = matchlist(line, '^\s*\([^ ]\+\)\s\+\(.*[^ ]\)\s*$')
-                if len(mtls) >= 3
-                    let s:dicts[s:types[type]][mtls[1]] = mtls[2]
-                endif
+        if !empty(s:paths[s:types[type]])
+            for file in s:paths[s:types[type]]
+                for line in readfile(file)
+                    let mtls = matchlist(line, '^\s*\([^ ]\+\)\s\+\(.*[^ ]\)\s*$')
+                    if len(mtls) >= 3
+                        let s:dicts[s:types[type]][mtls[1]] = mtls[2]
+                    endif
+                endfor
             endfor
         endif
     endif
 
-    return has_key(s:paths, s:types[type]) && s:paths[s:types[type]] != '' ? 1 : 0
+    return has_key(s:paths, s:types[type]) && !empty(s:paths[s:types[type]]) ? 1 : 0
 endf
 
 function s:PopHelpList()
