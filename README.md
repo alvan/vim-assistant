@@ -1,8 +1,6 @@
 assistant.vim
 =============
 
-Vim script: http://www.vim.org/scripts/script.php?script_id=2805
-
 Display the definition of functions, variables, etc. (Tags, PHP/JS/Vim/...)
 
 #### Usage
