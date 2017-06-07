@@ -3,7 +3,7 @@
 "          File:  assistant.vim
 "        Author:  Alvan
 "      Modifier:  Alvan
-"      Modified:  2015-09-28
+"      Modified:  2017-06-07
 "
 " --}}}
 
@@ -11,7 +11,7 @@
 if exists("g:loaded_assistant")
     finish
 endif
-let g:loaded_assistant = "1.6"
+let g:loaded_assistant = "1.7"
 
 " ================================== Conf {{{ ==================================
 "
@@ -196,7 +196,7 @@ function s:PopHelpList()
     let tlen = len(tlst) - 1
     while tlen >= 0
         if tlst[tlen]['kind'] =~ s:aTags
-            call add(list, substitute(substitute(substitute(tlst[tlen]['cmd'], '^\s*/^\s*', '', ''), '\s*\$/$', '', ''), '\\\\', '\\', '') . '  in  ' . pathshorten(tlst[tlen]['filename']))
+            call add(list, substitute(substitute(substitute(tlst[tlen]['cmd'], '^\s*/^\s*', '', ''), '\s*\$/$', '', ''), '\\\\', '\\', 'g') . '  in  ' . pathshorten(tlst[tlen]['filename']))
         endif
         let tlen -= 1
     endw
