@@ -196,7 +196,7 @@ function s:PopHelpList()
     let tlen = len(tlst) - 1
     while tlen >= 0
         if tlst[tlen]['kind'] =~ s:aTags
-            call add(list, substitute(substitute(tlst[tlen]['cmd'], '^\s*/^\s*', '', ''), '\s*\$/$', '', '') . '  in  ' . pathshorten(tlst[tlen]['filename']))
+            call add(list, substitute(substitute(substitute(tlst[tlen]['cmd'], '^\s*/^\s*', '', ''), '\s*\$/$', '', ''), '\\\\', '\\', '') . '  in  ' . pathshorten(tlst[tlen]['filename']))
         endif
         let tlen -= 1
     endw
